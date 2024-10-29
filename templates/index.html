@@ -1,0 +1,169 @@
+x<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Model Prediction</title>
+    <style>
+        /* Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #8e9eab, #eef2f3);
+            color: #333;
+            animation: fadeInBackground 1s ease-in-out;
+        }
+
+        /* Header Styling with Typing Animation */
+        h1 {
+            font-size: 2.5em;
+            color: #4b79a1;
+            margin-bottom: 1rem;
+            animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid #4b79a1;
+            max-width: 100%;
+        }
+
+        /* Form Styling */
+        form {
+            background: #fff;
+            color: #333;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            animation: slideUp 1s ease-in-out;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 20px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="number"]:focus, input[type="number"]:hover {
+            border-color: #4b79a1;
+            box-shadow: 0px 0px 8px rgba(75, 121, 161, 0.6);
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #4b79a1;
+            border: none;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="submit"]:hover {
+            background: #355c7d;
+            transform: translateY(-3px);
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                padding: 20px;
+                width: 90%;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.3em;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInBackground {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: #ffeb3b;
+            margin-top: 1rem;
+            text-align: center;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>Predict the Loan</h1>
+        <form action="/predict" method="POST">
+            <label for="Dependents">Dependents:</label>
+            <input type="number" id="Dependents" name="Dependents" required>
+
+            <label for="Self_Employed">Self Employed:</label>
+            <input type="number" id="Self_Employed" name="Self_Employed" required>
+
+            <label for="ApplicantIncome">Applicant Income:</label>
+            <input type="number" id="ApplicantIncome" name="ApplicantIncome" required>
+
+            <label for="CoapplicantIncome">Coapplicant Income:</label>
+            <input type="number" id="CoapplicantIncome" name="CoapplicantIncome" required>
+
+            <label for="LoanAmount">Loan Amount:</label>
+            <input type="number" id="LoanAmount" name="LoanAmount" required>
+
+            <label for="Loan_Amount_Term">Loan Amount Term:</label>
+            <input type="number" id="Loan_Amount_Term" name="Loan_Amount_Term" required>
+
+            <label for="Credit_History">Credit History:</label>
+            <input type="number" id="Credit_History" name="Credit_History" required>
+
+            <input type="submit" value="Predict">
+        </form>
+        {% if prediction_text %}
+        <h2>Results:{{ prediction_text }}</h2>
+        {% endif %}
+    </div>
+</body>
+</html>
