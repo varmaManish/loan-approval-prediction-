@@ -1,4 +1,4 @@
-x<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -23,19 +23,12 @@ x<!DOCTYPE html>
             animation: fadeInBackground 1s ease-in-out;
         }
 
-        /* Header Styling with Typing Animation */
         h1 {
             font-size: 2.5em;
             color: #4b79a1;
             margin-bottom: 1rem;
-            animation: typing 2s steps(22), blink 0.5s step-end infinite alternate;
-            white-space: nowrap;
-            overflow: hidden;
-            border-right: 4px solid #4b79a1;
-            max-width: 100%;
         }
 
-        /* Form Styling */
         form {
             background: #fff;
             color: #333;
@@ -44,7 +37,6 @@ x<!DOCTYPE html>
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
             width: 100%;
             max-width: 400px;
-            animation: slideUp 1s ease-in-out;
         }
 
         label {
@@ -64,11 +56,6 @@ x<!DOCTYPE html>
             box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        input[type="number"]:focus, input[type="number"]:hover {
-            border-color: #4b79a1;
-            box-shadow: 0px 0px 8px rgba(75, 121, 161, 0.6);
-        }
-
         input[type="submit"] {
             width: 100%;
             padding: 12px;
@@ -80,57 +67,39 @@ x<!DOCTYPE html>
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        input[type="submit"]:hover {
-            background: #355c7d;
-            transform: translateY(-3px);
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+        /* Info Icon Styling */
+        .info-icon {
+            display: inline-block;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: #007bff;
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            form {
-                padding: 20px;
-                width: 90%;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-
-            h2 {
-                font-size: 1.3em;
-            }
+        /* Info Popup Styling */
+        .info-popup {
+            display: none; /* Initially hidden */
+            position: absolute;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            width: 300px;
+            margin-top: 5px;
         }
 
-        /* Animations */
-        @keyframes fadeInBackground {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        h2 {
-            font-size: 1.5em;
-            color: #ffeb3b;
-            margin-top: 1rem;
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
+        .info-popup::after {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            border-width: 10px;
+            border-style: solid;
+            border-color: transparent transparent #f9f9f9 transparent;
         }
     </style>
 </head>
@@ -138,10 +107,18 @@ x<!DOCTYPE html>
     <div>
         <h1>Predict the Loan</h1>
         <form action="/predict" method="POST">
-            <label for="Dependents">Dependents:</label>
+            <label for="Dependents">
+                TOTAL FAMILY MEMBER
+                <span class="info-icon" onclick="toggleInfo('infoDependents')">ℹ️</span>
+            </label>
+            <div id="infoDependents" class="info-popup">Enter the total number of family members you are financially supporting.</div>
             <input type="number" id="Dependents" name="Dependents" required>
 
-            <label for="Self_Employed">Self Employed:</label>
+            <label for="Self_Employed">
+                Self Employed (1 or 0)
+                <span class="info-icon" onclick="toggleInfo('infoSelfEmployed')">ℹ️</span>
+            </label>
+            <div id="infoSelfEmployed" class="info-popup">Enter 1 if you are self-employed, otherwise enter 0.</div>
             <input type="number" id="Self_Employed" name="Self_Employed" required>
 
             <label for="ApplicantIncome">Applicant Income:</label>
@@ -165,5 +142,19 @@ x<!DOCTYPE html>
         <h2>Results:{{ prediction_text }}</h2>
         {% endif %}
     </div>
+
+    <script>
+        function toggleInfo(infoId) {
+            const popup = document.getElementById(infoId);
+            if (popup.style.display === 'block') {
+                popup.style.display = 'none';
+            } else {
+                popup.style.display = 'block';
+            }
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000); // Hide after 3 seconds
+        }
+    </script>
 </body>
 </html>
