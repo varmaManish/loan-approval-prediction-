@@ -121,19 +121,39 @@
             <div id="infoSelfEmployed" class="info-popup">Enter 1 if you are self-employed, otherwise enter 0.</div>
             <input type="number" id="Self_Employed" name="Self_Employed" required>
 
-            <label for="ApplicantIncome">Applicant Income:</label>
+            <label for="ApplicantIncome">
+                Applicant Income
+                <span class="info-icon" onclick="toggleInfo('infoApplicantIncome')">ℹ️</span>
+            </label>
+            <div id="infoApplicantIncome" class="info-popup">Enter your monthly income in numeric format.</div>
             <input type="number" id="ApplicantIncome" name="ApplicantIncome" required>
 
-            <label for="CoapplicantIncome">Coapplicant Income:</label>
+            <label for="CoapplicantIncome">
+                Coapplicant Income
+                <span class="info-icon" onclick="toggleInfo('infoCoapplicantIncome')">ℹ️</span>
+            </label>
+            <div id="infoCoapplicantIncome" class="info-popup">Enter the co-applicant's monthly income in numeric format.</div>
             <input type="number" id="CoapplicantIncome" name="CoapplicantIncome" required>
 
-            <label for="LoanAmount">Loan Amount:</label>
+            <label for="LoanAmount">
+                Loan Amount
+                <span class="info-icon" onclick="toggleInfo('infoLoanAmount')"></span>
+            </label>
+            <div id="infoLoanAmount" class="info-popup"></div>
             <input type="number" id="LoanAmount" name="LoanAmount" required>
 
-            <label for="Loan_Amount_Term">Loan Amount Term:</label>
+            <label for="Loan_Amount_Term">
+                Loan Amount Term
+                <span class="info-icon" onclick="toggleInfo('infoLoanAmountTerm')">ℹ️</span>
+            </label>
+            <div id="infoLoanAmountTerm" class="info-popup">Enter the loan term in months (e.g., 12 for 1 years).</div>
             <input type="number" id="Loan_Amount_Term" name="Loan_Amount_Term" required>
 
-            <label for="Credit_History">Credit History:</label>
+            <label for="Credit_History">
+                Credit History
+                <span class="info-icon" onclick="toggleInfo('infoCreditHistory')">ℹ️</span>
+            </label>
+            <div id="infoCreditHistory" class="info-popup">Enter 1 if you have a good credit history, otherwise enter 0.</div>
             <input type="number" id="Credit_History" name="Credit_History" required>
 
             <input type="submit" value="Predict">
